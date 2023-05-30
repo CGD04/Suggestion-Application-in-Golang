@@ -14,6 +14,7 @@ func AddUserHandler(w http.ResponseWriter, r *http.Request) {
 	var admin model.Admin
 	if err := json.NewDecoder(r.Body).Decode(&admin); err != nil {
 		httpResponse.ResponseWithError(w, http.StatusBadRequest, "invalid json body")
+		fmt.Println("error in decode", err)
 		return
 	}
 	defer r.Body.Close()
@@ -21,6 +22,7 @@ func AddUserHandler(w http.ResponseWriter, r *http.Request) {
 	saveErr := admin.Create()
 	if saveErr != nil {
 		httpResponse.ResponseWithError(w, http.StatusBadRequest, saveErr.Error())
+		fmt.Println("fghjkjhg", saveErr)
 		return
 	}
 	fmt.Println(admin)
