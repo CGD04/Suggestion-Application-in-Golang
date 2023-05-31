@@ -41,7 +41,7 @@ func InitializeRoutes() {
 	fhandler := http.FileServer(http.Dir("./view"))
 	router.PathPrefix("/").Handler(fhandler)
 
-	err := http.ListenAndServe("localhost:8080", router)
+	err := http.ListenAndServe(":8080", router)
 	log.Println("Application is running on port 8080........")
 	if err != nil {
 		fmt.Println("problem with listenandserve")
