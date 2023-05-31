@@ -3,6 +3,7 @@ package controller
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"myapp/model"
 	"myapp/utils/httpResponse"
 	"net/http"
@@ -34,6 +35,7 @@ func AddStudent(w http.ResponseWriter, r *http.Request) {
 func GetStud(w http.ResponseWriter, r *http.Request) {
 	//get url parameter
 	stdID := mux.Vars(r)["stdID"]
+	fmt.Printf("%T", stdID)
 	stdid, idErr := getUserID(stdID)
 	if idErr != nil {
 		httpResponse.ResponseWithError(w, http.StatusBadRequest, idErr.Error())

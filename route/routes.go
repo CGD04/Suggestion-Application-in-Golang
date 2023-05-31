@@ -19,8 +19,6 @@ func InitializeRoutes() {
 	router.HandleFunc("/student/{stdid}", controller.DeleteStudent).Methods("DELETE")
 	router.HandleFunc("/students", controller.GetAllStuds).Methods("GET")
 
-	//route for form
-	router.HandleFunc("/search", controller.Search).Methods("GET")
 	//routes for courses
 	router.HandleFunc("/course", controller.AddCourse).Methods("POST")
 	router.HandleFunc("/course/{id}", controller.GetCourse).Methods("GET")
@@ -38,6 +36,7 @@ func InitializeRoutes() {
 	router.HandleFunc("/showEnrolled/{stdid}/{cid}", controller.ShowEnrolled).Methods("GET")
 	router.HandleFunc("/deleteEnrolled/{stdid}/{cid}", controller.DeleteEnrolled).Methods("DELETE")
 	router.HandleFunc("/showEnrolledAll", controller.ShowAllEnrolled).Methods("GET")
+
 	// to serve static file
 	fhandler := http.FileServer(http.Dir("./view"))
 	router.PathPrefix("/").Handler(fhandler)

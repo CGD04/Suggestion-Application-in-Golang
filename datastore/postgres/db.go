@@ -15,7 +15,7 @@ const (
 	postgres_port     = 5432
 	postgres_user     = "postgres595"
 	postgres_password = "lid5cV2dRKlz7D52H7VoI6dUCkr9jN7A"
-	postgres_dbname   = "postgresDB"
+	postgres_dbname   = "my_db_9hup"
 )
 
 //create pointer variable Db which points to sql driver

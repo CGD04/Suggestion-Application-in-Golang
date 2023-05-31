@@ -22,7 +22,7 @@ function addCourse() {
     }
     fetch("/course",{
         method:"POST",
-        body:JSON.stringify(_data),
+        body:JSON.stringify(_data), //javascript to json
         header:{"Content-type":"application/json; charset=UTF-8"}
     }).then(response =>{
         if (response.ok){
@@ -36,18 +36,9 @@ function addCourse() {
 }
 
 function errMessage() {
-    // parentDiv = document.getElementById("container")
-    // newDiv = document.createElement("div")
-    // parentDiv.appendChild(newDiv)
-    // para = document.createElement("p")
-    // newDiv.appendChild(para)
-    // para.innerHTML = "The student is already registered"
-    // para.setAttribute("style","color:red;")
-    // setTimeout(function(){
-    //     para.innerHTML = "";
-    // },700);
     alert("The student is already registered")
 }
+
 function showCourse(info){
     data = JSON.parse(info)
     newRow(data)

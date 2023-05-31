@@ -12,13 +12,11 @@ import (
 )
 
 func AddCourse(w http.ResponseWriter, r *http.Request) {
-	//cookie verification
 	if !VerifyCookie(w, r) {
 		return
 	}
 
 	var course model.Course
-
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&course)
 	if err != nil {
@@ -43,17 +41,13 @@ func AddCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetCourse(w http.ResponseWriter, r *http.Request) {
+	if !VerifyCookie(w, r) {
+		return
+	}
 	id := mux.Vars(r)["id"]
-	// Id,err := getUserID(id)
-	// if err != nil {
-	// 	fmt.Print("Error in converting string to integer")
-	// 	httpResponse.ResponseWithError(w,http.StatusBadRequest,err.Error())
-	// 	return
-	// }
 	var course model.Course
 	getErr := course.GetInfo(id)
 	if getErr != nil {
-		fmt.Print("couldn't get the data from the database")
 		httpResponse.ResponseWithError(w, http.StatusBadRequest, getErr.Error())
 		return
 	}
@@ -61,18 +55,10 @@ func GetCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateCourse(w http.ResponseWriter, r *http.Request) {
-	//cookie verification
 	if !VerifyCookie(w, r) {
 		return
 	}
-
 	id := mux.Vars(r)["id"]
-	// Id, err := getUserID(id)
-	// if err != nil {
-	// 	fmt.Println("Error in converting string to integer",err)
-	// 	httpResponse.ResponseWithError(w,http.StatusBadRequest,err.Error())
-	// 	return
-	// }
 	var course model.Course
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&course)
@@ -96,7 +82,6 @@ func UpdateCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteCourse(w http.ResponseWriter, r *http.Request) {
-	//cookie verification
 	if !VerifyCookie(w, r) {
 		return
 	}
@@ -116,11 +101,9 @@ func DeleteCourse(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetAllCourses(w http.ResponseWriter, r *http.Request) {
-	//cookie verification
 	if !VerifyCookie(w, r) {
 		return
 	}
-
 	courses, getErr := model.GetCourses()
 	if getErr != nil {
 		fmt.Print("error in getting the informaiton from the database")
@@ -129,10 +112,4 @@ func GetAllCourses(w http.ResponseWriter, r *http.Request) {
 	}
 	httpResponse.ResponseWithJson(w, http.StatusOK, courses)
 	fmt.Println("List for courses:", courses)
-}
-
-func Search(w http.ResponseWriter, r *http.Request) {
-	query := mux.Vars(r)["query"]
-	fmt.Print(query)
-	fmt.Println("it is same as we thought")
 }
